@@ -27,5 +27,5 @@ docker run -it --rm \
 --env MDNS_IPSOURCE_1=netinfo \
 --env MDNS_IPSOURCE_2=mesos \
 --env MDNS_IPSOURCE_3=host \
-h0tbird/docker-mesos-dns -v 2
+h0tbird/mesos-dns -v 2
 ```

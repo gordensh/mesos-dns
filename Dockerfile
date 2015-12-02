@@ -16,15 +16,21 @@ ENV DOWNLOAD_URL "https://github.com/mesosphere/mesos-dns/releases/download"
 #------------------------------------------------------------------------------
 
 RUN apk update && \
-    apk add openssl && \
+    apk add openssl bash && \
     wget ${DOWNLOAD_URL}/v${MESOS_DNS_VERSION}/mesos-dns-v${MESOS_DNS_VERSION}-linux-amd64 \
     -O /bin/mesos-dns && \
     chmod +x /bin/mesos-dns && \
     apk del openssl
 
 #------------------------------------------------------------------------------
+# Populate root file system:
+#------------------------------------------------------------------------------
+
+ADD rootfs /
+
+#------------------------------------------------------------------------------
 # Expose ports and entrypoint:
 #------------------------------------------------------------------------------
 
 EXPOSE 53
-ENTRYPOINT ["/bin/mesos-dns"]
+ENTRYPOINT ["/init"]

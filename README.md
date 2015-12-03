@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/h0tbird/docker-mesos-dns.svg?branch=master)](https://travis-ci.org/h0tbird/docker-mesos-dns)
 
-Containerized Mesos DNS service
+A containerized Mesos DNS service. It is possible to publish the service IP to `etcd` or `consul`:
 
 ```
 docker run -it --rm \
@@ -27,5 +27,8 @@ docker run -it --rm \
 --env MDNS_IPSOURCE_1=netinfo \
 --env MDNS_IPSOURCE_2=mesos \
 --env MDNS_IPSOURCE_3=host \
+--env KV_IP=127.0.0.1 \
+--env KV_PORT=2379 \
+--env KV_KEY=/mesos/dns \
 h0tbird/mesos-dns -v 2
 ```

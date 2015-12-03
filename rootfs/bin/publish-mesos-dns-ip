@@ -14,15 +14,8 @@
 #------------------------------------------------------------------------------
 
 function dns_alive() {
-
-  # Test DNS service:
-  timeout -t 2 bash -c "echo > /dev/tcp/127.0.0.1/${MDNS_PORT}" &> /dev/null && {
-
-    # Publish the service:
-    kviator --kvstore=${KV_TYPE} --client=${KV_IP}:${KV_PORT} put \
-    ${KV_PATH}/$(hostname) "nameserver $(hostname -i)"; return 0
-
-  } || return 1
+  timeout -t 2 bash -c "echo > /dev/tcp/127.0.0.1/${MDNS_PORT}" \
+  &> /dev/null && return 0 || return 1
 }
 
 #------------------------------------------------------------------------------
@@ -30,6 +23,12 @@ function dns_alive() {
 #------------------------------------------------------------------------------
 
 while true; do
-  dns_alive && echo "$(date) alive" || echo "$(date) dead"
-  sleep 1
+
+  dns_alive && {
+    kviator --kvstore=${KV_TYPE} --client=${KV_IP}:${KV_PORT} put \
+    ${KV_PATH}/$(hostname) "nameserver $(hostname -i)"
+  }
+
+  sleep 60
+
 done

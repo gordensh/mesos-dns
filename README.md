@@ -2,7 +2,10 @@
 
 [![Build Status](https://travis-ci.org/h0tbird/docker-mesos-dns.svg?branch=master)](https://travis-ci.org/h0tbird/docker-mesos-dns)
 
-A containerized Mesos DNS service. It is possible to publish the service IP to `etcd`, `consul` or `zookeeper`:
+A containerized Mesos DNS service:
+
+- Publish the service IP to `etcd`, `consul` or `zookeeper`.
+- Set key expiration time `KV_TTL` (etcd only).
 
 ```
 docker run -it --rm \

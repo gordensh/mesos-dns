@@ -6,72 +6,72 @@
 
 CONFIG_FILE='/config.json'
 
-: "${MDNS_ZK:=zk://zk1:2181,zk2:2181,zk3:2181/mesos}"
+export MDNS_ZK="${MDNS_ZK:=zk://zk1:2181,zk2:2181,zk3:2181/mesos}"
 sed -i "s#XXX-MDNS_ZK-XXX#${MDNS_ZK}#" ${CONFIG_FILE}
 
-: "${MDNS_REFRESHSECONDS:=60}"
+export MDNS_REFRESHSECONDS="${MDNS_REFRESHSECONDS:=60}"
 sed -i "s#XXX-MDNS_REFRESHSECONDS-XXX#${MDNS_REFRESHSECONDS}#" ${CONFIG_FILE}
 
-: "${MDNS_TTL:=60}"
+export MDNS_TTL="${MDNS_TTL:=60}"
 sed -i "s#XXX-MDNS_TTL-XXX#${MDNS_TTL}#" ${CONFIG_FILE}
 
-: "${MDNS_DOMAIN:=mesos}"
+export MDNS_DOMAIN="${MDNS_DOMAIN:=mesos}"
 sed -i "s#XXX-MDNS_DOMAIN-XXX#${MDNS_DOMAIN}#" ${CONFIG_FILE}
 
-: "${MDNS_PORT:=53}"
+export MDNS_PORT="${MDNS_PORT:=53}"
 sed -i "s#XXX-MDNS_PORT-XXX#${MDNS_PORT}#" ${CONFIG_FILE}
 
-: "${MDNS_RESOLVERS:=8.8.8.8}"
+export MDNS_RESOLVERS="${MDNS_RESOLVERS:=8.8.8.8}"
 sed -i "s#XXX-MDNS_RESOLVERS-XXX#${MDNS_RESOLVERS}#" ${CONFIG_FILE}
 
-: "${MDNS_TIMEOUT:=5}"
+export MDNS_TIMEOUT="${MDNS_TIMEOUT:=5}"
 sed -i "s#XXX-MDNS_TIMEOUT-XXX#${MDNS_TIMEOUT}#" ${CONFIG_FILE}
 
-: "${MDNS_HTTPON:=true}"
+export MDNS_HTTPON="${MDNS_HTTPON:=true}"
 sed -i "s#XXX-MDNS_HTTPON-XXX#${MDNS_HTTPON}#" ${CONFIG_FILE}
 
-: "${MDNS_DNSON:=true}"
+export MDNS_DNSON="${MDNS_DNSON:=true}"
 sed -i "s#XXX-MDNS_DNSON-XXX#${MDNS_DNSON}#" ${CONFIG_FILE}
 
-: "${MDNS_HTTPPORT:=8123}"
+export MDNS_HTTPPORT="${MDNS_HTTPPORT:=8123}"
 sed -i "s#XXX-MDNS_HTTPPORT-XXX#${MDNS_HTTPPORT}#" ${CONFIG_FILE}
 
-: "${MDNS_EXTERNALON:=true}"
+export MDNS_EXTERNALON="${MDNS_EXTERNALON:=true}"
 sed -i "s#XXX-MDNS_EXTERNALON-XXX#${MDNS_EXTERNALON}#" ${CONFIG_FILE}
 
-: "${MDNS_LISTENER:=0.0.0.0}"
+export MDNS_LISTENER="${MDNS_LISTENER:=0.0.0.0}"
 sed -i "s#XXX-MDNS_LISTENER-XXX#${MDNS_LISTENER}#" ${CONFIG_FILE}
 
-: "${MDNS_SOAMNAME:=ns1.mesos}"
+export MDNS_SOAMNAME="${MDNS_SOAMNAME:=ns1.mesos}"
 sed -i "s#XXX-MDNS_SOAMNAME-XXX#${MDNS_SOAMNAME}#" ${CONFIG_FILE}
 
-: "${MDNS_SOARNAME:=root.ns1.mesos}"
+export MDNS_SOARNAME="${MDNS_SOARNAME:=root.ns1.mesos}"
 sed -i "s#XXX-MDNS_SOARNAME-XXX#${MDNS_SOARNAME}#" ${CONFIG_FILE}
 
-: "${MDNS_SOAREFRESH:=60}"
+export MDNS_SOAREFRESH="${MDNS_SOAREFRESH:=60}"
 sed -i "s#XXX-MDNS_SOAREFRESH-XXX#${MDNS_SOAREFRESH}#" ${CONFIG_FILE}
 
-: "${MDNS_SOARETRY:=600}"
+export MDNS_SOARETRY="${MDNS_SOARETRY:=600}"
 sed -i "s#XXX-MDNS_SOARETRY-XXX#${MDNS_SOARETRY}#" ${CONFIG_FILE}
 
-: "${MDNS_SOAEXPIRE:=86400}"
+export MDNS_SOAEXPIRE="${MDNS_SOAEXPIRE:=86400}"
 sed -i "s#XXX-MDNS_SOAEXPIRE-XXX#${MDNS_SOAEXPIRE}#" ${CONFIG_FILE}
 
-: "${MDNS_SOAMINTTL:=60}"
+export MDNS_SOAMINTTL="${MDNS_SOAMINTTL:=60}"
 sed -i "s#XXX-MDNS_SOAMINTTL-XXX#${MDNS_SOAMINTTL}#" ${CONFIG_FILE}
 
-: "${MDNS_IPSOURCE_1:=netinfo}"
+export MDNS_IPSOURCE_1="${MDNS_IPSOURCE_1:=netinfo}"
 sed -i "s#XXX-MDNS_IPSOURCE_1-XXX#${MDNS_IPSOURCE_1}#" ${CONFIG_FILE}
 
-: "${MDNS_IPSOURCE_2:=mesos}"
+export MDNS_IPSOURCE_2="${MDNS_IPSOURCE_2:=mesos}"
 sed -i "s#XXX-MDNS_IPSOURCE_2-XXX#${MDNS_IPSOURCE_2}#" ${CONFIG_FILE}
 
-: "${MDNS_IPSOURCE_3:=host}"
+export MDNS_IPSOURCE_3="${MDNS_IPSOURCE_3:=host}"
 sed -i "s#XXX-MDNS_IPSOURCE_3-XXX#${MDNS_IPSOURCE_3}#" ${CONFIG_FILE}
 
 #------------------------------------------------------------------------------
 # Run:
 #------------------------------------------------------------------------------
 
-MDNS_PORT=${MDNS_PORT} /bin/publish-mesos-dns-ip &
+/bin/publish-mesos-dns-ip &
 exec /bin/mesos-dns -config=/config.json $*

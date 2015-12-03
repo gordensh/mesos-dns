@@ -13,7 +13,7 @@
 #------------------------------------------------------------------------------
 
 function dns_alive() {
-  timeout 2 bash -c \
+  timeout -t 2 bash -c \
   "echo > /dev/tcp/127.0.0.1/${MDNS_PORT}" &> /dev/null \
   && return 0 || return 1
 }

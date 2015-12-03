@@ -18,7 +18,7 @@ ENV MDNS_VERSION="0.5.1" \
 #------------------------------------------------------------------------------
 
 RUN apk add --update -t deps openssl unzip \
-    && apk add --update bash \
+    && apk add --update bash curl \
     && wget ${MDNS_URL}/v${MDNS_VERSION}/mesos-dns-v${MDNS_VERSION}-linux-amd64 -O /bin/mesos-dns \
     && wget ${KVIATOR_URL}/v${KVIATOR_VERSION}/kviator-${KVIATOR_VERSION}-linux-amd64.zip \
     && unzip -d /bin kviator-${KVIATOR_VERSION}-linux-amd64.zip \

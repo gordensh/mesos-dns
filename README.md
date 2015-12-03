@@ -31,5 +31,7 @@ docker run -it --rm \
 --env KV_IP=127.0.0.1 \
 --env KV_PORT=2379 \
 --env KV_PATH=/mesos/dns \
+--env KV_TTL=30 \
+--env KV_PUSH_INTERVAL=15 \
 h0tbird/mesos-dns -v 2
 ```

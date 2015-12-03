@@ -8,6 +8,9 @@
 : "${KV_IP:=127.0.0.1}"
 : "${KV_PORT:=2379}"
 : "${KV_PATH:=/mesos/dns}"
+: "${KV_TTL:=30}"
+: "${KV_PUSH_INTERVAL:=${KV_TTL/2}}"
+
 
 #------------------------------------------------------------------------------
 # Functions:
@@ -25,10 +28,17 @@ function dns_alive() {
 while true; do
 
   dns_alive && {
+
+    # Publish the service:
     kviator --kvstore=${KV_TYPE} --client=${KV_IP}:${KV_PORT} put \
     ${KV_PATH}/$(hostname) "nameserver $(hostname -i)"
+
+    # Set expiration TTL (only etcd):
+    [ "${KV_TYPE}" == "etcd" ] && \
+    curl -L http://${KV_IP}:${KV_PORT}/v2/keys${KV_PATH}/$(hostname) \
+    -XPUT -d value="nameserver $(hostname -i)" -d ttl=${KV_TTL} -d prevExist=true
   }
 
-  sleep 60
+  sleep ${KV_PUSH_INTERVAL}
 
 done

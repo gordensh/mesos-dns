@@ -17,7 +17,7 @@
 #------------------------------------------------------------------------------
 
 function dns_alive() {
-  timeout -t 2 bash -c "echo > /dev/tcp/127.0.0.1/${MDNS_PORT}" \
+  timeout -t 2 echo > /dev/tcp/127.0.0.1/${MDNS_PORT} \
   &> /dev/null && return 0 || return 1
 }
 
@@ -35,7 +35,7 @@ sleep 3; while true; do
 
     # Set expiration TTL (only etcd):
     [ "${KV_TYPE}" == "etcd" ] && \
-    curl -L http://${KV_IP}:${KV_PORT}/v2/keys${KV_PATH}/$(hostname) \
+    curl -sL http://${KV_IP}:${KV_PORT}/v2/keys${KV_PATH}/$(hostname) \
     -XPUT -d value="nameserver $(hostname -i)" -d ttl=${KV_TTL} -d prevExist=true
   }
 

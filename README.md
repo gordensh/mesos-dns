@@ -4,9 +4,6 @@
 
 A containerized Mesos DNS service:
 
-- Publish the service IP to `etcd`, `consul` or `zookeeper`.
-- Set key expiration time `KV_TTL` (etcd only).
-
 ```
 docker run -it --rm \
 --env MDNS_ZK=zk://core-1:2181,core-5:2181,core-9:2181/mesos \
@@ -30,11 +27,5 @@ docker run -it --rm \
 --env MDNS_IPSOURCE_1=netinfo \
 --env MDNS_IPSOURCE_2=mesos \
 --env MDNS_IPSOURCE_3=host \
---env KV_TYPE=etcd \
---env KV_IP=127.0.0.1 \
---env KV_PORT=2379 \
---env KV_PATH=/mesos/dns \
---env KV_TTL=30 \
---env KV_PUSH_INTERVAL=15 \
 h0tbird/mesos-dns -v 2
 ```

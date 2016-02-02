@@ -73,5 +73,4 @@ sed -i "s#XXX-MDNS_IPSOURCE_3-XXX#${MDNS_IPSOURCE_3}#" ${CONFIG_FILE}
 # Run:
 #------------------------------------------------------------------------------
 
-/bin/publish-mesos-dns-ip &
 exec /bin/mesos-dns -config=/config.json $*

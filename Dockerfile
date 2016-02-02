@@ -38,4 +38,4 @@ ADD rootfs /
 #------------------------------------------------------------------------------
 
 EXPOSE 53
-ENTRYPOINT ["/bin/pidunu", "/init"]
+ENTRYPOINT ["/init"]

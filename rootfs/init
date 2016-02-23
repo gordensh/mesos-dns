@@ -60,14 +60,12 @@ sed -i "s#XXX-MDNS_SOAEXPIRE-XXX#${MDNS_SOAEXPIRE}#" ${CONFIG_FILE}
 export MDNS_SOAMINTTL="${MDNS_SOAMINTTL:=60}"
 sed -i "s#XXX-MDNS_SOAMINTTL-XXX#${MDNS_SOAMINTTL}#" ${CONFIG_FILE}
 
-export MDNS_IPSOURCE_1="${MDNS_IPSOURCE_1:=netinfo}"
-sed -i "s#XXX-MDNS_IPSOURCE_1-XXX#${MDNS_IPSOURCE_1}#" ${CONFIG_FILE}
+: ${MDNS_IPSOURCE:=netinfo,mesos,host} && {
 
-export MDNS_IPSOURCE_2="${MDNS_IPSOURCE_2:=mesos}"
-sed -i "s#XXX-MDNS_IPSOURCE_2-XXX#${MDNS_IPSOURCE_2}#" ${CONFIG_FILE}
-
-export MDNS_IPSOURCE_3="${MDNS_IPSOURCE_3:=host}"
-sed -i "s#XXX-MDNS_IPSOURCE_3-XXX#${MDNS_IPSOURCE_3}#" ${CONFIG_FILE}
+  IFS=',' read -ra SRC <<< "${MDNS_IPSOURCE}"
+  for i in "${SRC[@]}"; do IPS="${IPS},\"${i}\""; done
+  sed -i "s#XXX-MDNS_IPSOURCE-XXX#${IPS:1}#" ${CONFIG_FILE}
+}
 
 #------------------------------------------------------------------------------
 # Run:

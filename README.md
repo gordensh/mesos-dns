@@ -25,5 +25,5 @@ docker run -it --rm \
 --env MDNS_SOAEXPIRE=86400 \
 --env MDNS_SOAMINTTL=60 \
 --env MDNS_IPSOURCE=netinfo,mesos,host \
-h0tbird/mesos-dns -v 2
+h0tbird/mesos-dns:v0.5.2 -v 2
 ```

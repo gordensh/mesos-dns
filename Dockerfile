@@ -9,7 +9,7 @@ MAINTAINER Marc Villacorta Morera <marc.villacorta@gmail.com>
 # Environment variables:
 #------------------------------------------------------------------------------
 
-ENV MDNS_VERSION="0.5.2" \
+ENV MDNS_VERSION="0.6.0" \
     MDNS_URL="https://github.com/mesosphere/mesos-dns/releases/download"
 
 #------------------------------------------------------------------------------

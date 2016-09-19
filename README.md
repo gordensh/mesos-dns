@@ -25,5 +25,5 @@ docker run -it --rm \
 --env MDNS_SOAEXPIRE=86400 \
 --env MDNS_SOAMINTTL=60 \
 --env MDNS_IPSOURCE=netinfo,mesos,host \
-katosys/mesos-dns:v0.5.2-2 -v 2
+katosys/mesos-dns:v0.6.0-1 -v 2
 ```

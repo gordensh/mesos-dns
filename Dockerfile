@@ -9,19 +9,25 @@ MAINTAINER Marc Villacorta Morera <marc.villacorta@gmail.com>
 # Environment variables:
 #------------------------------------------------------------------------------
 
-ENV MDNS_VERSION="0.6.0" \
-    MDNS_URL="https://github.com/mesosphere/mesos-dns/releases/download"
+ENV GOPATH="/go" \
+    VERSION="v0.6.0"
+
+ENV PATH="${PATH}:${GOPATH}/bin"
 
 #------------------------------------------------------------------------------
 # Install Mesos DNS and KViator
 #------------------------------------------------------------------------------
 
-RUN apk --no-cache add --update -t deps openssl unzip ca-certificates \
-    && apk --no-cache add --update bash curl \
-    && wget ${MDNS_URL}/v${MDNS_VERSION}/mesos-dns-v${MDNS_VERSION}-linux-amd64 -O /bin/mesos-dns \
-    && chmod +x /bin/mesos-dns \
+RUN apk --no-cache add --update -t deps git go \
+    && apk --no-cache add --update bash \
+    && go get -u github.com/tools/godep \
+    && go get -u github.com/mesosphere/mesos-dns \
+    && cd ${GOPATH}/src/github.com/mesosphere/mesos-dns \
+    && git checkout tags/${VERSION} -b ${VERSION} \
+    && go install github.com/mesosphere/mesos-dns \
+    && mv ${GOPATH}/bin/mesos-dns /bin/ \
     && apk del --purge deps \
-    && rm -rf /tmp/* /var/cache/apk/*
+    && rm -rf ${GOPATH} /var/cache/apk/*
 
 #------------------------------------------------------------------------------
 # Populate root file system:

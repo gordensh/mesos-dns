@@ -6,7 +6,7 @@ A containerized Mesos DNS service:
 
 ```
 docker run -it --rm \
---env MDNS_ZK=zk://core-1:2181,core-5:2181,core-9:2181/mesos \
+--env MDNS_ZK=zk://quorum-1:2181,quorum-2:2181,quorum-3:2181/mesos \
 --env MDNS_REFRESHSECONDS=60 \
 --env MDNS_TTL=60 \
 --env MDNS_DOMAIN=mesos \
@@ -25,5 +25,5 @@ docker run -it --rm \
 --env MDNS_SOAEXPIRE=86400 \
 --env MDNS_SOAMINTTL=60 \
 --env MDNS_IPSOURCE=netinfo,mesos,host \
-katosys/mesos-dns:v0.6.0-1 -v 2
+katosys/mesos-dns:v0.6.0-2 -v 2
 ```

@@ -1,6 +1,6 @@
-# docker-mesos-dns
+# mesos-dns
 
-[![Build Status](https://travis-ci.org/katosys/docker-mesos-dns.svg?branch=master)](https://travis-ci.org/katosys/docker-mesos-dns)
+[![Build Status](https://travis-ci.org/katosys/mesos-dns.svg?branch=master)](https://travis-ci.org/katosys/mesos-dns)
 
 A containerized Mesos DNS service:
 
